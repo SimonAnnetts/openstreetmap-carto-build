@@ -1,0 +1,176 @@
+*** esdm-uncontoured.mml	2019-01-09 13:34:48.431870811 +0000
+--- esdm-contoured.mml	2019-01-09 14:06:44.583873100 +0000
+***************
+*** 34,39 ****
+--- 34,59 ----
+      key_field: ""
+      geometry_field: "way"
+      extent: "-20037508,-20037508,20037508,20037508"
++   extentsHillshade: &extentsHillshade
++     #extent: "-1224560.782, 6106728.874, 445299.218, 8625918.874"
++     #extent: "-1224560.79, 5780282.44, 667963.33, 8859241.61"
++     #extent: "-1669838.707, 6446260.791, 556611.293, 8399830.791"
++     extent: "-1558519.254, 6106853.075, 1335980.746, 9100353.075"
++     srs-name: "900913"
++     srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
++   extentsContours: &extentsContours
++     #extent: "-1224560.782, 6106728.874, 445299.218, 8625918.874"
++     #extent: "-1224560.79, 5780282.44, 667963.33, 8859241.61"
++     #extent: "-1669838.707, 6446260.791, 556611.293, 8399830.791"
++     extent: "-1558519.254, 6106853.075, 1335980.746, 9100353.075"
++     srs-name: "WGS84"
++     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
++   osm2contours: &osm2contours
++     type: "postgis"
++     dbname: "contours"
++     key_field: ""
++     geometry_field: "way"
++     extent: "-20037508,-20037508,20037508,20037508"
+  
+  Stylesheet:
+    - esdm/style-OS.mss
+***************
+*** 53,58 ****
+--- 73,79 ----
+    - aerialways.mss
+    - admin.mss
+    - addressing.mss
++   - esdm/contours.mss
+  Layer:
+    - id: world
+      geometry: polygon
+***************
+*** 159,164 ****
+--- 180,311 ----
+          ) AS features
+      properties:
+        minzoom: 10
++   - id: relief-5000
++     geometry: raster
++     <<: *extentsHillshade
++     Datasource:
++       file: esdm/osm-contours/relief-5000.tif
++       type: gdal
++       format: tiff
++     properties:
++       minzoom: 1
++       maxzoom: 4
++   - id: relief-500
++     geometry: raster
++     <<: *extentsHillshade
++     Datasource:
++       file: esdm/osm-contours/relief-500.tif
++       type: gdal
++       format: tiff
++     properties:
++       minzoom: 5
++       maxzoom: 8
++   - id: hillshade-5000
++     geometry: raster
++     <<: *extentsHillshade
++     Datasource:
++       file: esdm/osm-contours/hillshade-5000.tif
++       type: gdal
++       format: tiff
++     properties:
++       minzoom: 1
++       maxzoom: 4
++   - id: hillshade-1000
++     geometry: raster
++     <<: *extentsHillshade
++     Datasource:
++       file: esdm/osm-contours/hillshade-1000.tif
++       type: gdal
++       format: tiff
++     properties:
++       minzoom: 5
++       maxzoom: 7
++   - id: hillshade-500
++     geometry: raster
++     <<: *extentsHillshade
++     Datasource:
++       file: esdm/osm-contours/hillshade-500.tif
++       type: gdal
++       format: tiff
++     properties:
++       minzoom: 8
++       maxzoom: 8     
++   - id: hillshade-90
++     geometry: raster
++     <<: *extentsHillshade
++     Datasource:
++       file: esdm/osm-contours/hillshade-90.tif
++       type: gdal
++       format: tiff
++     properties:
++       minzoom: 9      
++   - id: contours-100
++     geometry: linestring
++     <<: *extents
++     Datasource:
++       <<: *osm2contours
++       table: |-
++         (SELECT
++             way, ele
++           FROM planet_osm_line
++           WHERE ele % 100 = 0 AND ele !=0
++         ) AS contours
++     properties:
++       minzoom: 12
++   - id: contours-50a
++     geometry: linestring
++     <<: *extents
++     Datasource:
++       <<: *osm2contours
++       table: |-
++         (SELECT
++             way, ele
++           FROM planet_osm_line
++           WHERE ele % 100 != 0 AND ele % 50 = 0 AND ele !=0
++         ) AS contours
++     properties:
++       minzoom: 12
++       maxzoom: 12
++   - id: contours-50b
++     geometry: linestring
++     <<: *extents
++     Datasource:
++       <<: *osm2contours
++       table: |-
++         (SELECT
++             way, ele
++           FROM planet_osm_line
++           WHERE ele % 100 != 0 AND ele % 50 = 0 AND ele !=0
++         ) AS contours
++     properties:
++       minzoom: 14
++   - id: contours-20
++     geometry: linestring
++     <<: *extents
++     Datasource:
++       <<: *osm2contours
++       table: |-
++         (SELECT
++             way, ele
++           FROM planet_osm_line
++           WHERE ele % 100 != 0 AND ele % 20 = 0 AND ele !=0
++         ) AS contours
++     properties:
++       minzoom: 13
++       maxzoom: 13
++   - id: contours-10
++     geometry: linestring
++     <<: *extents
++     Datasource:
++       <<: *osm2contours
++       table: |-
++         (SELECT
++             way, ele
++           FROM planet_osm_line
++           WHERE ele % 50 != 0 AND ele % 10 = 0 AND ele !=0
++         ) AS contours
++     properties:
++       minzoom: 14
+    - id: landcover-line
+      geometry: linestring
+      <<: *extents

@@ -1,0 +1,60 @@
+*** esdm-27700-uncontoured.mml	2019-01-09 12:54:44.636063549 +0000
+--- esdm-27700-uncontoured.mml	2019-01-08 14:12:08.681848900 +0000
+***************
+*** 1,21 ****
+  scale: 1
+  metatile: 2
+  name: OpenStreetMap Carto
+! description: An ESDM OpenStreetMap mapnik style, in CartoCSS
+  bounds: &world
+!   - -180
+!   - -85.05112877980659
+!   - 180
+!   - 85.05112877980659
+  center:
+    - 0
+-   - 0
+-   - 4
+  format: png
+  interactivity: false
+  minzoom: 0
+! maxzoom: 18
+! srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  
+  # Various parts to be included later on
+  _parts:
+--- 1,21 ----
+  scale: 1
+  metatile: 2
+  name: OpenStreetMap Carto
+! description: An ESDM OpenStreetMap mapnik style, in CartoCSS and 27700 projection
+  bounds: &world
+!   - -350000
+!   - -100000
+!   - 1050000
+!   - 1300000
+  center:
++   - 350000
++   - 600000
+    - 0
+  format: png
+  interactivity: false
+  minzoom: 0
+! maxzoom: 15
+! srs: "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs"
+  
+  # Various parts to be included later on
+  _parts:
+***************
+*** 28,33 ****
+--- 28,37 ----
+      extent: *world
+      srs-name: "WGS84"
+      srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
++   extents27700: &extents27700
++     extent: "-530195.990, 11072.310, 901584.010, 1195352.310"
++     srs-name: "27700"
++     srs: "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs"
+    osm2pgsql: &osm2pgsql
+      type: "postgis"
+      dbname: "gis"

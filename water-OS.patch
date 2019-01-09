@@ -1,0 +1,44 @@
+*** water-OS.mss	2018-11-21 16:11:09.621605446 +0000
+--- water-OS.mss	2018-11-07 17:44:35.649780026 +0000
+***************
+*** 1,4 ****
+--- 1,5 ----
+  @water-text: #4d80b3;
++ @water-casing-color: #08B7E8;
+  @glacier: #ddecec;
+  @glacier-line: #9cf;
+  
+***************
+*** 6,12 ****
+  
+  #water-areas {
+    [natural = 'glacier']::natural {
+!     [zoom >= 5] {
+        line-width: 1.0;
+        line-color: @glacier-line;
+        polygon-fill: @glacier;
+--- 7,13 ----
+  
+  #water-areas {
+    [natural = 'glacier']::natural {
+!     [zoom >= 8] {
+        line-width: 1.0;
+        line-color: @glacier-line;
+        polygon-fill: @glacier;
+***************
+*** 90,96 ****
+        [int_intermittent != 'yes'][zoom >= 14],
+        [zoom >= 15] {
+          line-width: 2.5;
+!         line-color: white;
+          [waterway = 'stream'][zoom >= 15] {
+            line-width: 3.5;
+          }
+--- 91,97 ----
+        [int_intermittent != 'yes'][zoom >= 14],
+        [zoom >= 15] {
+          line-width: 2.5;
+!         line-color: @water-casing-color;
+          [waterway = 'stream'][zoom >= 15] {
+            line-width: 3.5;
+          }
