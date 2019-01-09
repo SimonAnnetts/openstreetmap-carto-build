@@ -1,0 +1,5 @@
+*.orig
+*.rej
+*.tar.gz
+*.xml
+backups/*
