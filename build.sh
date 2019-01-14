@@ -2,6 +2,9 @@
 
 mkdir -p backups/ 2>/dev/null
 
+getrelease=0
+[ "$1" == "-r" ] && getrelease=1
+
 exec > >(awk '{print strftime("%Y-%m-%d %H:%M:%S [1] "),$0; fflush();}')
 exec 2> >(awk '{print strftime("%Y-%m-%d %H:%M:%S [2] "),$0; fflush();}' >&2)
 
@@ -19,25 +22,29 @@ for i in *.mss; do
     cp -v ${i} backups/${i%.*}_${startdate}.mss 2>/dev/null
 done
 
-echo "Attempting to get latest release of openstreetmap-carto..."
-url=$(lynx -listonly -nonumbers -dump "https://github.com/gravitystorm/openstreetmap-carto/releases" |grep "archive" |grep "tar.gz" |head -n1)
-filename=${url##*/}
-if [ -n "${filename}" ]; then
-    wget -O ${filename} -o /dev/null "${url}"
-    [ $? -ne 0 ] && echo "Could not download the latest openstreetmap-carto release from ${url}!" && exit 1
-else
-    echo "Could not find a link to the latest openstreetmap-carto release!" && exit 1
-fi
+if [ $getrelease -eq 1 ]; then
 
-echo "Extracting the release archive..."
-mkdir tmp 2>/dev/null
-tar -zxC tmp -f ${filename}
-[ $? -ne 0 ] && echo "Could not extract the latest openstreetmap-carto release!" && exit 1
-mkdir ../openstreetmap-carto/ 2>/dev/null
-rm -Rf ../openstreetmap-carto/scripts 2>/dev/null
-rm -Rf ../openstreetmap-carto/symbols 2>/dev/null
-mv -f tmp/*/* ../openstreetmap-carto/ 2>/dev/null
-rm -Rf tmp
+    echo "Attempting to get latest release of openstreetmap-carto..."
+    url=$(lynx -listonly -nonumbers -dump "https://github.com/gravitystorm/openstreetmap-carto/releases" |grep "archive" |grep "tar.gz" |head -n1)
+    filename=${url##*/}
+    if [ -n "${filename}" ]; then
+        wget -O ${filename} -o /dev/null "${url}"
+        [ $? -ne 0 ] && echo "Could not download the latest openstreetmap-carto release from ${url}!" && exit 1
+    else
+        echo "Could not find a link to the latest openstreetmap-carto release!" && exit 1
+    fi
+
+    echo "Extracting the release archive..."
+    mkdir tmp 2>/dev/null
+    tar -zxC tmp -f ${filename}
+    [ $? -ne 0 ] && echo "Could not extract the latest openstreetmap-carto release!" && exit 1
+    mkdir ../openstreetmap-carto/ 2>/dev/null
+    rm -Rf ../openstreetmap-carto/scripts 2>/dev/null
+    rm -Rf ../openstreetmap-carto/symbols 2>/dev/null
+    mv -f tmp/*/* ../openstreetmap-carto/ 2>/dev/null
+    rm -Rf tmp
+
+fi
 
 echo "Applying patches...."
 cp -f ../openstreetmap-carto/roads.mss roads-OS.mss && \

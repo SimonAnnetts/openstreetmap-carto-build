@@ -98,7 +98,7 @@
 @secondary-link-width-z12:        1.5;
 @tertiary-width-z12:              3.0;
 @residential-width-z12:           0.5;
-@unclassified-width-z12:          2.0;
+@unclassified-width-z12:          1.0;
 
 @motorway-width-z13:              6;
 @motorway-link-width-z13:         4;

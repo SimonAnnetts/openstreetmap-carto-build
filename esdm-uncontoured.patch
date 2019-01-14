@@ -1,7 +1,7 @@
 *** esdm-uncontoured.mml	2018-12-05 19:56:55.717147673 +0000
 --- esdm-uncontoured.mml	2018-12-05 19:59:28.918674800 +0000
 ***************
-*** 1,7 ****
+*** 1,15 ****
   scale: 1
   metatile: 2
   name: OpenStreetMap Carto
@@ -9,7 +9,15 @@
   bounds: &world
     - -180
     - -85.05112877980659
---- 1,7 ----
+    - 180
+    - 85.05112877980659
+  center:
+!   - 0
+!   - 0
+!   - 4
+  format: png
+  interactivity: false
+--- 1,15 ----
   scale: 1
   metatile: 2
   name: OpenStreetMap Carto
@@ -17,6 +25,14 @@
   bounds: &world
     - -180
     - -85.05112877980659
+    - 180
+    - 85.05112877980659
+  center:
+!   - -2
+!   - 52
+!   - 14
+  format: png
+  interactivity: false
 ***************
 *** 14,20 ****
   format: png

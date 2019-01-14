@@ -2,15 +2,12 @@
 
 #contours-100 {
 		line-color: @contour;
-		[zoom = 12] { line-width: 0.8; }
-		[zoom = 13] { line-width: 0.9; }
-		[zoom >= 14] { 
-				line-width: 1.0;
-				line-smooth: 0.5;
+		[zoom = 12] { line-width: 1.0; }
+		[zoom >= 12] {
 				text-face-name: @book-fonts;
 				text-size: 11;
 				text-fill: @contour;
-				text-halo-radius: 1;
+				text-halo-radius: 3;
 				text-halo-fill: rgba(255,255,255,1);
 				text-halo-comp-op: soft-light;
 				text-placement: line;
@@ -20,7 +17,12 @@
 				text-min-path-length: 200;
 				text-spacing: 200;
 				text-upright: left;
-		}				
+		}
+		[zoom = 13] { line-width: 1.1; }
+		[zoom >= 14] { 
+				line-width: 1.2;
+				line-smooth: 0.5;
+		}
 }
 
 #contours-50b {
@@ -31,7 +33,7 @@
 				text-face-name: @book-fonts;
 				text-size: 11;
 				text-fill: @contour;
-				text-halo-radius: 1;
+				text-halo-radius: 3;
 				text-halo-fill: rgba(255,255,255,1);
 				text-halo-comp-op: soft-light;
 				text-placement: line;
@@ -48,20 +50,7 @@
 		line-color: @contour;
 		[zoom = 12] { 
 				line-width: 0.6;
-				line-smooth: 0.5;
-				text-face-name: @book-fonts;
-				text-size: 11;
-				text-fill: @contour;
-				text-halo-radius: 1;
-				text-halo-fill: rgba(255,255,255,1);
-				text-halo-comp-op: soft-light;
-				text-placement: line;
-				text-name: [ele];
-				text-max-char-angle-delta: 10;
-				text-label-position-tolerance: 100;
-				text-min-path-length: 200;
-				text-spacing: 200;
-				text-upright: left;					
+				line-smooth: 0.5;			
 		}
 }
 
@@ -81,7 +70,7 @@
 				text-face-name: @book-fonts;
 				text-size: 11;
 				text-fill: @contour;
-				text-halo-radius: 1;
+				text-halo-radius: 3;
 				text-halo-fill: rgba(255,255,255,1);
 				text-halo-comp-op: soft-light;
 				text-placement: line;

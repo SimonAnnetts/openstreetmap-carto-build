@@ -12,9 +12,9 @@
 !   - 180
 !   - 85.05112877980659
   center:
-    - 0
--   - 0
--   - 4
+!   - -2
+!   - 52
+!   - 14
   format: png
   interactivity: false
   minzoom: 0
@@ -34,9 +34,9 @@
 !   - 1050000
 !   - 1300000
   center:
-+   - 350000
-+   - 600000
-    - 0
+!   - 3.5818
+!   - 2.0561
+!   - 14
   format: png
   interactivity: false
   minzoom: 0

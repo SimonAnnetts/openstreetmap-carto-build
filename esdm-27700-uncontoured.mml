@@ -8,9 +8,9 @@ bounds: &world
   - 1050000
   - 1300000
 center:
-  - 350000
-  - 600000
-  - 0
+  - 3.4
+  - 2.1
+  - 10
 format: png
 interactivity: false
 minzoom: 0
