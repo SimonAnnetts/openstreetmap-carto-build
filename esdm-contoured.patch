@@ -41,7 +41,7 @@
       geometry: polygon
 ***************
 *** 159,164 ****
---- 180,311 ----
+--- 180,325 ----
           ) AS features
       properties:
         minzoom: 10
@@ -171,6 +171,20 @@
 +         ) AS contours
 +     properties:
 +       minzoom: 14
++   - id: contours-0
++     geometry: linestring
++     <<: *extents
++     Datasource:
++       <<: *osm2contours
++       table: |-
++         (SELECT
++             way, ele
++           FROM planet_osm_line
++           WHERE ele =0
++         ) AS contours
++     properties:
++       minzoom: 12
++       clear-label-cache: on
     - id: landcover-line
       geometry: linestring
       <<: *extents

@@ -83,6 +83,27 @@
 		}
 }
 
+#contours-0 {
+		line-color: @contour;
+		[zoom >= 12] { 
+				line-width: 0.6;
+				line-smooth: 0.5;
+				text-face-name: @book-fonts;
+				text-size: 11;
+				text-fill: @contour;
+				text-halo-radius: 3;
+				text-halo-fill: rgba(255,255,255,1);
+				text-halo-comp-op: soft-light;
+				text-placement: line;
+				text-name: [ele];
+				text-max-char-angle-delta: 10;
+				text-label-position-tolerance: 100;
+				text-min-path-length: 300;
+				text-spacing: 800;
+				text-upright: left;					
+		}
+}
+
 #hillshade-5000 {
     raster-opacity: 0.9;
     raster-scaling: bilinear;

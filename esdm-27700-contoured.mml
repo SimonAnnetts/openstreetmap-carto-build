@@ -8,9 +8,9 @@ bounds: &world
   - 1050000
   - 1300000
 center:
-  - 3.4
-  - 2.1
-  - 10
+  - 3.5818
+  - 2.0561
+  - 14
 format: png
 interactivity: false
 minzoom: 0
@@ -312,6 +312,20 @@ Layer:
         ) AS contours
     properties:
       minzoom: 14
+  - id: contours-0
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2contours
+      table: |-
+        (SELECT
+            way, ele
+          FROM planet_osm_line
+          WHERE ele =0
+        ) AS contours
+    properties:
+      minzoom: 12
+      clear-label-cache: on
   - id: landcover-line
     geometry: linestring
     <<: *extents
